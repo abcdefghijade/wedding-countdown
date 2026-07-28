@@ -7,59 +7,81 @@
 <style>
 
 *{
+    margin:0;
+    padding:0;
     box-sizing:border-box;
 }
 
 body{
-    margin:0;
     padding:18px;
     background:transparent;
-    color:#222;
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:#222;
     -webkit-font-smoothing:antialiased;
 }
 
 .countdowns{
     display:flex;
     gap:18px;
-    width:100%;
 }
 
-.countdown{
+.card{
+
     flex:1;
 
-    border:1px solid #ececec;
+    min-height:110px;
+
+    border:1px solid #e8e8e8;
     border-radius:12px;
 
     background:white;
-
-    min-height:110px;
 
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
 
+}
+
+.title{
+
+    font-size:16px;
+    font-weight:600;
+
+    margin-bottom:12px;
+
     text-align:center;
 
-    padding:22px;
 }
 
-.event-name{
-    font-size:17px;
-    font-weight:600;
-    margin-bottom:12px;
-}
+.count{
 
-.message{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:7px;
+
     font-size:15px;
     color:#555;
+
+}
+
+.icon{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:16px;
 }
 
 @media(max-width:700px){
 
 .countdowns{
+
     flex-direction:column;
+
 }
 
 }
@@ -72,28 +94,43 @@ body{
 
 <div class="countdowns">
 
-<div class="countdown">
-<div class="event-name">
+<div class="card">
+
+<div class="title">
 Wedding
 </div>
 
-<div class="message" id="wedding"></div>
+<div class="count">
+<span class="icon">💍</span>
+<span id="wedding"></span>
 </div>
 
-<div class="countdown">
-<div class="event-name">
+</div>
+
+<div class="card">
+
+<div class="title">
 Banquet Reception
 </div>
 
-<div class="message" id="banquet"></div>
+<div class="count">
+<span class="icon">💍</span>
+<span id="banquet"></span>
 </div>
 
-<div class="countdown">
-<div class="event-name">
+</div>
+
+<div class="card">
+
+<div class="title">
 Italy Elopement
 </div>
 
-<div class="message" id="italy"></div>
+<div class="count">
+<span class="icon">💍</span>
+<span id="italy"></span>
+</div>
+
 </div>
 
 </div>
@@ -132,23 +169,25 @@ const target=new Date(event.date+"T00:00:00");
 const diff=Math.round((target-today)/(1000*60*60*24));
 
 if(diff>1){
-return `💍 ${diff} days to go`;
+return `${diff} days to go`;
 }
 
 if(diff===1){
-return "💍 1 day to go";
+return "1 day to go";
 }
 
 if(diff===0){
-return `🎉 Today's the ${event.name}!`;
+return "Today's the big day!";
 }
 
-return "✓ Celebration complete";
+return "Celebration complete";
 
 }
 
 events.forEach(event=>{
+
 document.getElementById(event.id).textContent=countdown(event);
+
 });
 
 </script>
