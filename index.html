@@ -1,118 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
 
-    body {
-      margin: 0;
-      padding: 18px;
-      background: transparent;
-      color: #222222;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+*{
+    box-sizing:border-box;
+}
 
-    .countdowns {
-      display: flex;
-      gap: 18px;
-      width: 100%;
-    }
+body{
+    margin:0;
+    padding:18px;
+    background:transparent;
+    color:#222;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+}
 
-.countdown {
-  flex: 1;
-  padding: 10px 14px;
-  background: transparent;
-    }
+.countdowns{
+    display:flex;
+    gap:18px;
+    width:100%;
+}
 
-    .event-name {
-      margin-bottom: 7px;
-      font-size: 15px;
-      font-weight: 600;
-    }
+.countdown{
+    flex:1;
 
-    .message {
-      font-size: 15px;
-      line-height: 1.4;
-    }
+    border:1px solid #ececec;
+    border-radius:12px;
 
-    @media (max-width: 650px) {
-      .countdowns {
-        flex-direction: column;
-      }
-    }
-  </style>
+    background:white;
+
+    min-height:110px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:22px;
+}
+
+.event-name{
+    font-size:17px;
+    font-weight:600;
+    margin-bottom:12px;
+}
+
+.message{
+    font-size:15px;
+    color:#555;
+}
+
+@media(max-width:700px){
+
+.countdowns{
+    flex-direction:column;
+}
+
+}
+
+</style>
+
 </head>
 
 <body>
-  <div class="countdowns">
 
-    <div class="countdown">
-      <div class="event-name">Wedding</div>
-      <div class="message" id="wedding"></div>
-    </div>
+<div class="countdowns">
 
-    <div class="countdown">
-      <div class="event-name">Banquet Reception</div>
-      <div class="message" id="banquet"></div>
-    </div>
+<div class="countdown">
+<div class="event-name">
+Wedding
+</div>
 
-    <div class="countdown">
-      <div class="event-name">Italy Elopement</div>
-      <div class="message" id="italy"></div>
-    </div>
+<div class="message" id="wedding"></div>
+</div>
 
-  </div>
+<div class="countdown">
+<div class="event-name">
+Banquet Reception
+</div>
 
-  <script>
-    const events = [
-      {
-        id: "wedding",
-        name: "wedding",
-        date: "2027-06-12"
-      },
-      {
-        id: "banquet",
-        name: "banquet reception",
-        date: "2027-06-27"
-      },
-      {
-        id: "italy",
-        name: "Italy elopement",
-        date: "2027-08-02"
-      }
-    ];
+<div class="message" id="banquet"></div>
+</div>
 
-    function getCountdown(event) {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
+<div class="countdown">
+<div class="event-name">
+Italy Elopement
+</div>
 
-      const target = new Date(event.date + "T00:00:00");
-      const millisecondsPerDay = 1000 * 60 * 60 * 24;
-      const daysLeft = Math.round((target - today) / millisecondsPerDay);
+<div class="message" id="italy"></div>
+</div>
 
-      if (daysLeft > 1) {
-        return `💍 ${daysLeft} days to go`;
-      }
+</div>
 
-      if (daysLeft === 1) {
-        return "💍 1 day to go";
-      }
+<script>
 
-      if (daysLeft === 0) {
-        return `🎉 Today’s the ${event.name}!`;
-      }
+const events=[
 
-      return "✓ Completed";
-    }
+{
+id:"wedding",
+name:"wedding",
+date:"2027-06-12"
+},
 
-    events.forEach((event) => {
-      document.getElementById(event.id).textContent = getCountdown(event);
-    });
-  </script>
+{
+id:"banquet",
+name:"Chinese banquet",
+date:"2027-06-27"
+},
+
+{
+id:"italy",
+name:"Italy elopement",
+date:"2027-08-02"
+}
+
+];
+
+function countdown(event){
+
+const today=new Date();
+today.setHours(0,0,0,0);
+
+const target=new Date(event.date+"T00:00:00");
+
+const diff=Math.round((target-today)/(1000*60*60*24));
+
+if(diff>1){
+return `💍 ${diff} days to go`;
+}
+
+if(diff===1){
+return "💍 1 day to go";
+}
+
+if(diff===0){
+return `🎉 Today's the ${event.name}!`;
+}
+
+return "✓ Celebration complete";
+
+}
+
+events.forEach(event=>{
+document.getElementById(event.id).textContent=countdown(event);
+});
+
+</script>
+
 </body>
 </html>
